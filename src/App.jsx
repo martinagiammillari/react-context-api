@@ -9,6 +9,7 @@ import About from "./pages/About"
 import Products from "./pages/Products"
 import DefaultLayout from './layout/DefaultLayout'
 import SingleProduct from './pages/SingleProduct'
+import { BudgetProvider } from './context/BudgetContext'
 
 
 
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+    <BudgetProvider>
       <BrowserRouter>
         <Routes>
 
@@ -30,6 +32,7 @@ function App() {
         </Routes>
 
       </BrowserRouter>
+      </BudgetProvider>
 
     </>
   )

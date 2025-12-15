@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useBudget } from "../context/BudgetContext";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const { isBudget } = useBudget();
 
   useEffect(() => {
     axios
@@ -12,6 +14,10 @@ const Products = () => {
         setProducts(resp.data);
       })
   }, []);
+
+  //MI SERVONO I PRODOTTI FILTRATI
+
+  const filteredProducts = isBudget ? products.filter((curProduct) => curProduct.price <= 30) : products;
 
   return (
     <div className="container py-4">
@@ -22,7 +28,10 @@ const Products = () => {
       </p>
 
       <div className="row">
-        {products.map((product) => (
+
+        {/* FACCIO MAP SUI PRODOTTI FILTRATI */}
+        
+        {filteredProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
 
             <Link to={`/products/${product.id}`}>
